@@ -13,7 +13,7 @@ iv = b"6oyZDr22E3ychjM%"
 all_tokens = []
 token_status = {"is_getting": False, "count": 0, "total": 0, "success": 0}
 
-INFO_ACCOUNT = {"uid": "4332566158", "password": "LuanOri_RIO_BY_LUANORI_DEV_2222"}
+INFO_ACCOUNT = {"uid": "4332669484", "password": "LuanOri_RIO_BY_LUANORI_DEV_2222"}
 info_token = None  
 
 def parse_results(parsed_results):
@@ -248,8 +248,15 @@ def spam():
             "api_sẽ_chạy_lại_sau": remain_str
         })
     
+        # === FIX CHO VERCEL: TỰ ĐỘNG GET TOKEN KHI KHÔNG CÓ ===
     if not all_tokens:
-        return jsonify({"error": "Chưa có token khả dụng"}), 500
+        print("[Vercel] Không có token → tự động get ngay lập tức...")
+        get_jwt_tokens()  # Gọi luôn hàm lấy token
+        if not all_tokens:
+            return jsonify({
+                "error": "Lấy token thất bại",
+                "message": "Vui lòng thử lại sau vài giây hoặc kiểm tra account.json"
+            }), 500
     # ====================================================
     
     tokens = all_tokens
