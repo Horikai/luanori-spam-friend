@@ -1,0 +1,6 @@
+Flask==3.0.3  # Hoặc phiên bản bạn đang dùng
+requests==2.32.3
+pycryptodome==3.20.0  # Cho Crypto (AES)
+protobuf-decoder==0.0.7  # Giả sử package protobuf_decoder (check pip để xác nhận)
+serverless-wsgi==2.0.2  # Để wrap Flask thành serverless handler cho Vercel
+gunicorn==22.0.0  # Optional: Để run local, nhưng Vercel dùng @vercel/python

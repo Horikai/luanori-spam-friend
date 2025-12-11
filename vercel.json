@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": { "runtime": "python3.12" }  // Phiên bản Python từ code của bạn (3.12.3)
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.py"
+    }
+  ],
+  "functions": {
+    "api/index.py": {
+      "memory": 1024,  // Tăng memory nếu cần (default 1024MB)
+      "maxDuration": 30  // Thời gian chạy max 30s (tăng nếu spam chậm)
+    }
+  },
+  "env": {
+    "PYTHONUNBUFFERED": "1"  // Để log realtime
+  }
+}
