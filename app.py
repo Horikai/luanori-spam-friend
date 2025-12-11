@@ -248,8 +248,16 @@ def spam():
             "api_sẽ_chạy_lại_sau": remain_str
         })
     
+        # === FIX CHO VERCEL: TỰ ĐỘNG GET TOKEN KHI KHÔNG CÓ ===
     if not all_tokens:
-        return jsonify({"error": "Chưa có token khả dụng"}), 500
+        print("[Vercel] Không có token → tự động get ngay lập tức...")
+        get_jwt_tokens()  # Gọi luôn hàm lấy token
+        if not all_tokens:
+            return jsonify({
+                "error": "Lấy token thất bại",
+                "message": "Vui lòng thử lại sau vài giây hoặc kiểm tra account.json"
+            }), 500
+    # ====================================================
     
     tokens = all_tokens
 
